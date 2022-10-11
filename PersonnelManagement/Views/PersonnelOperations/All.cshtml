@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Model.Employee>
+
+@{
+    ViewData["Title"] = "AllOperations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Personnel operations</h1>
+
+<p>
+    <a asp-action="Recruitment">Recruitment</a>
+</p>
+<p>
+    <a asp-action="Dismissal">Dismissal</a>
+</p>
+<p>
+    <a asp-action="Transfer">Transfer</a>
+</p>
+

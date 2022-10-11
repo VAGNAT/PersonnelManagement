@@ -1,0 +1,52 @@
+﻿@using Model
+@using Model.ViewModel
+@model Transfer
+
+@{
+    ViewData["Title"] = "AddTransfer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add transfer</h1>
+
+<h4>New transfer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Transfer">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Employee" class="control-label"></label>
+                <select asp-for="EmployeeId" asp-items="@ViewBag.AllEmployees" class="form-control">
+                    <option value=@null>Select a employee</option>                    
+                </select>                
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Department" class="control-label"></label>
+                <select asp-for="DepartmentId" asp-items="@ViewBag.AllDepartments" class="form-control">
+                    <option value=@null>Select a department</option>                    
+                </select>                
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-action="All" type="button" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

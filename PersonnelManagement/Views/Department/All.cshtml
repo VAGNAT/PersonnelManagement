@@ -1,0 +1,38 @@
+﻿@using Model
+@model IEnumerable<Department>
+
+@{
+    ViewData["Title"] = "AllDepartments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Structure company</h1>
+
+<p>
+    <a asp-action="Add">Create new department</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Change", new Department{ Id = item.Id,  Name = item.Name, GroupDepartment = item.GroupDepartment, GroupDepartmentId = item.GroupDepartmentId}) |
+                    @Html.ActionLink("Delete", "Delete", new { Id=item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

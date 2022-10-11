@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Model.Employee>
+
+@{
+    ViewData["Title"] = "AllEmployees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 1;
+}
+
+<h1>All Employees</h1>
+
+<p>
+    <a asp-action="Add">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @count
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Change", new { Id = item.Id,  FirstName = item.FirstName, LastName = item.LastName, DateOfBirth = item.DateOfBirth}) | 
+                    @Html.ActionLink("Delete", "Delete", new { Id=item.Id })
+                </td>
+            </tr>
+            count++;
+        }
+    </tbody>
+</table>

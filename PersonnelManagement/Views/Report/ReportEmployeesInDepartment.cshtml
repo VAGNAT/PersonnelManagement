@@ -1,0 +1,75 @@
+﻿@using Model.ViewModel.Reports
+@model ReportEmployeesInDepartment
+
+@{
+    ViewData["Title"] = "ReportEmployeesInDepartment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 1;
+}
+
+<h1>Report employees in department</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Generate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="ParameterReport!.DateStart" class="control-label"></label>
+                <input asp-for="ParameterReport!.DateStart" type="date" class="form-control" />
+                <span asp-validation-for="ParameterReport!.DateStart" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ParameterReport!.DateEnd" class="control-label"></label>
+                <input asp-for="ParameterReport!.DateEnd" type="date" class="form-control"/>
+                <span asp-validation-for="ParameterReport!.DateEnd" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ParameterReport!.Department" class="control-label"></label>
+                <select asp-for="ParameterReport!.DepartmentId" asp-items="@ViewBag.AllDepartments" class="form-control">
+                    <option value=@null>Select a Department</option>
+                </select>
+                <span asp-validation-for="ParameterReport!.DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="submit" value="Generate" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                First name
+            </th>
+            <th>
+                Last name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Employees!)
+        {
+            <tr>
+                <td>
+                    @count
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+            </tr>
+            count++;
+        }
+    </tbody>
+</table>
+
+
